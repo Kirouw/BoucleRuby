@@ -1,69 +1,50 @@
-def half_pyramid
-	puts "Salut, bienvenue dans ma super pyramide ! Combien d'étages veux-tu ?"
+def ask_nbr_etages
+	puts "Salut, bienvenue dans ma super pyramide !"
+	puts "Entre le nombre d'étage : Entre 2 et 24 !"
 	print "> "
 	nb  = gets.chomp.to_i
-
-	i = 0
-	dieze = ""
-	space = ""
-
-	while i < nb
-
-		space = " " * (nb-i-1)
-
-		dieze = dieze + "#"
-
-		puts space+dieze
-
-		i = i + 1
+	while (nb<2) || (nb>24) || (nb%2!=0)
+		puts "Aïe aïe aïe...Choisis un nombre pair entre 2 et 24"
+		print "> "
+		nb = gets.chomp.to_i
 	end
+	return nb
 end
 
-def full_pyramid
-
-	puts "Salut, bienvenue dans ma full pyramide ! Combien d'étages veux-tu ?"
-	print "> "
-	nb  = gets.chomp.to_i
-
+def half_pyramid(nb)
 	i = 0
 
-	nb.times do |i|
-		puts " " * (nb-i-1) + "#" * i*2
-		i = i+1
-
+	while i <= nb
+		puts " "*(nb-i)+"#"*i
+		i += 1
 	end
+end
+
+def full_pyramidup(nb)
+	i = 1
+
+	while i <= nb
+		puts " "*(nb-i)+"#"*(2*i-1)
+		i +=1
+	end
+end
+
+def full_pyramiddown(nb)
+	i = nb-1
+
+	while i > 0
+		puts " "*(nb-i)+"#"*(2*i-1)+" "*(nb-i)
+		i -= 1
+	end
+end
+
+def wtf_pyramid(nb)
+
+	cnt = (nb+1)/2
+
+	full_pyramidup(cnt)
+	full_pyramiddown(cnt)
 
 end
 
-def wtf_pyramid
-
-	puts "Salut, bienvenue dans ma wtf pyramide ! Combien d'étages veux-tu ?"
-	print "> "
-	nb  = gets.chomp.to_i
-
-	cnt = 0
-
-	if nb == 2
-		puts "Ca ne tiendra jamais avec 2 étages..."
-	elsif nb%2 == 0
-		nb.times do |i|
-
-			i += 1
-			j = nb/2
-
-			if i < j
-				puts " " * ((nb-cnt)/2) + "#" * cnt
-				cnt = cnt+0
-			elsif i > j
-				puts " " * ((nb - cnt) / 2) + "#" * cnt
-				cnt = cnt-0
-			end
-
-		end	
-	else
-		puts "Une pyramide est toujours pairs !"
-	end
-
-end
-
-full_pyramid
+wtf_pyramid(ask_nbr_etages)
